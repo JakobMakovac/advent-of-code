@@ -106,8 +106,7 @@ function findFirstBoardToWin(boards, playNumbers) {
         }
     }
 
-    console.log(`Board number ${winningBoardIndex + 1} will win first, with a score of: `);
-    console.log(boards[winningBoardIndex].calculateScore(winningNumber));
+    return boards[winningBoardIndex].calculateScore(winningNumber);
 }
 
 function findLastBoardToWin(boards, playNumbers) {
@@ -133,7 +132,17 @@ function findLastBoardToWin(boards, playNumbers) {
         }
     }
 
-    console.log(boards[0].calculateScore(winningNumber));
+    return boards[0].calculateScore(winningNumber);
+}
+
+function initBoards(inputLines) {
+    let out = [];
+
+    for (var i = 1; i < inputLines.length; i++) {
+        out.push(new BingoBoard(inputLines[i].split('\r\n')));
+    }
+
+    return out;
 }
 
 fs.readFile('./input.txt', 'utf-8', (err, data) => {
@@ -142,14 +151,13 @@ fs.readFile('./input.txt', 'utf-8', (err, data) => {
         return;
     }
 
-    var boards = [];
     var inputLines = data.split('\r\n\r\n');
     var playNumbers = inputLines[0].split(',');
+    var boards = initBoards(inputLines);
 
-    for (var i = 1; i < inputLines.length; i++) {
-        boards.push(new BingoBoard(inputLines[i].split('\r\n')));
-    }
+    console.log(`Solution for Part One: ${findFirstBoardToWin(boards, playNumbers)}`);
 
-    // findFirstBoardToWin(boards, playNumbers);
-    findLastBoardToWin(boards, playNumbers);
+    var boards = initBoards(inputLines);
+
+    console.log(`Solution for Part Two: ${findLastBoardToWin(boards, playNumbers)}`);
 });

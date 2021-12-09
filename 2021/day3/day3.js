@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-class PowerModule {
+class DiagnosticReport {
     constructor (numberOfDigits) {
         this.dataLines = [];
         this.epsilonRate = '';
@@ -113,12 +113,12 @@ fs.readFile('./input.txt', 'utf-8', (err, data) => {
 
     let dataReadings = data.split('\r\n');
 
-    let powerModule = new PowerModule(dataReadings[0].length);
+    let report = new DiagnosticReport(dataReadings[0].length);
     
     for (var i = 0; i < dataReadings.length; i++) {
-        powerModule.addInputLine(dataReadings[i]);
+        report.addInputLine(dataReadings[i]);
     }
 
-    console.log(powerModule.getPowerConsumption());
-    console.log(powerModule.getLifeSupportRating());
+    console.log(`Solution for Part One: ${report.getPowerConsumption()}`);
+    console.log(`Solution for Part Two: ${report.getLifeSupportRating()}`);
 });
