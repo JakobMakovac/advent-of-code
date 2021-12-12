@@ -107,7 +107,7 @@ function getNeighbours(node, map) {
     return out;
 }
 
-fs.readFile('E:/workspace/advent-of-code/2021/day11/input.txt', 'utf-8', (err, data) => {
+fs.readFile('.input.txt', 'utf-8', (err, data) => {
     if (err) {
         console.error(err);
         return;
